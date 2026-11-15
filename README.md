@@ -75,16 +75,10 @@ I enjoy solving complex problems, improving application performance, and buildin
 <div align="center">
 
 <a href="https://github.com/vn7n24fzkq/github-profile-summary-cards">
-  <img src="https://raw.githubusercontent.com/ceschiavolim/ceschiavolim/master/profile-summary-card-output/nord_dark/0-profile-details.svg" width="100%" alt="GitHub Profile Details" />
+  <img src="https://raw.githubusercontent.com/ceschiavolim/ceschiavolim/master/profile-summary-card-output/nord_dark/0-profile-details.svg" width="100%" alt="GitHub Profile Statistics" />
 </a>
 
 </div>
-
-> 📌 GitHub statistics reflect public repository activity and may not represent all professional development experience.
->
-> As estatísticas refletem a atividade dos repositórios públicos e podem não representar toda a experiência profissional.
-
----
 
 ## 🎮 Personal Projects | Projetos Pessoais
 
