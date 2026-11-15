@@ -2,6 +2,8 @@ name: GitHub Profile Summary Cards
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
 
 permissions:
   contents: write
@@ -14,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: feat/github-profile-nord-dark
+          ref: main
           persist-credentials: true
 
       - name: Generate GitHub Profile Cards
@@ -23,21 +25,33 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           USERNAME: ceschiavolim
-          BRANCH_NAME: feat/github-profile-nord-dark
+          BRANCH_NAME: main
           THEME: nord_dark
           TIME_ZONE: America/Sao_Paulo
           AUTO_PUSH: false
 
-      - name: Diagnose generated files
+      - name: Verify generated files
         run: |
-          echo "=== Branch ==="
-          git branch --show-current
+          echo "=== Generated SVG files ==="
+          find profile-summary-card-output/nord_dark \
+            -maxdepth 1 -name "*.svg" -type f -print
 
           echo "=== Git status ==="
           git status --short
 
-          echo "=== Generated files ==="
-          find profile-summary-card-output -type f | head -30
+      - name: Commit and push generated cards
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          echo "=== Remote ==="
-          git remote -v
+          git add profile-summary-card-output/nord_dark/
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: update GitHub profile statistics"
+
+          echo "=== Publishing cards ==="
+          git push origin HEAD:main
