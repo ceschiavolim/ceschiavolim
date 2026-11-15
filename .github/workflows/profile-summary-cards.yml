@@ -3,10 +3,14 @@ name: GitHub Profile Summary Cards
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: '0 6 * * *'
 
 permissions:
   contents: write
+
+concurrency:
+  group: github-profile-summary-cards
+  cancel-in-progress: false
 
 jobs:
   generate:
@@ -16,7 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: master
           persist-credentials: true
 
       - name: Generate GitHub Profile Cards
@@ -25,33 +29,34 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           USERNAME: ceschiavolim
-          BRANCH_NAME: main
+          BRANCH_NAME: master
           THEME: nord_dark
           TIME_ZONE: America/Sao_Paulo
           AUTO_PUSH: false
 
-      - name: Verify generated files
+      - name: Verify generated SVGs
+        shell: bash
         run: |
-          echo "=== Generated SVG files ==="
-          find profile-summary-card-output/nord_dark \
-            -maxdepth 1 -name "*.svg" -type f -print
+          set -euo pipefail
+          ls -lah profile-summary-card-output/nord_dark/
+          test -f profile-summary-card-output/nord_dark/0-profile-details.svg
+          test -f profile-summary-card-output/nord_dark/1-repos-per-language.svg
+          test -f profile-summary-card-output/nord_dark/2-most-commit-language.svg
+          test -f profile-summary-card-output/nord_dark/3-stats.svg
+          test -f profile-summary-card-output/nord_dark/4-productive-time.svg
 
-          echo "=== Git status ==="
-          git status --short
-
-      - name: Commit and push generated cards
+      - name: Commit and push cards
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add profile-summary-card-output/nord_dark/
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo 'No changes to publish.'
             exit 0
           fi
 
-          git commit -m "chore: update GitHub profile statistics"
-
-          echo "=== Publishing cards ==="
-          git push origin HEAD:main
+          git commit -m 'chore: update GitHub profile statistics'
+          git push origin HEAD:master
