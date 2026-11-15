@@ -78,24 +78,6 @@ I enjoy solving complex problems, improving application performance, and buildin
   <img src="https://raw.githubusercontent.com/ceschiavolim/ceschiavolim/master/profile-summary-card-output/nord_dark/0-profile-details.svg" width="100%" alt="GitHub Profile Details" />
 </a>
 
-<br/><br/>
-
-<a href="https://github.com/vn7n24fzkq/github-profile-summary-cards">
-  <img src="https://raw.githubusercontent.com/ceschiavolim/ceschiavolim/master/profile-summary-card-output/nord_dark/1-repos-per-language.svg" width="49%" alt="Repositories per Language" />
-</a>
-<a href="https://github.com/vn7n24fzkq/github-profile-summary-cards">
-  <img src="https://raw.githubusercontent.com/ceschiavolim/ceschiavolim/master/profile-summary-card-output/nord_dark/2-most-commit-language.svg" width="49%" alt="Most Used Languages" />
-</a>
-
-<br/><br/>
-
-<a href="https://github.com/vn7n24fzkq/github-profile-summary-cards">
-  <img src="https://raw.githubusercontent.com/ceschiavolim/ceschiavolim/master/profile-summary-card-output/nord_dark/3-stats.svg" width="49%" alt="GitHub Statistics" />
-</a>
-<a href="https://github.com/vn7n24fzkq/github-profile-summary-cards">
-  <img src="https://raw.githubusercontent.com/ceschiavolim/ceschiavolim/master/profile-summary-card-output/nord_dark/4-productive-time.svg" width="49%" alt="Productive Time" />
-</a>
-
 </div>
 
 > 📌 GitHub statistics reflect public repository activity and may not represent all professional development experience.
