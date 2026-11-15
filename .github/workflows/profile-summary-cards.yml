@@ -1,9 +1,6 @@
 name: GitHub Profile Summary Cards
 
 on:
-  schedule:
-    - cron: "0 6 * * *"
-
   workflow_dispatch:
 
 permissions:
@@ -29,4 +26,18 @@ jobs:
           BRANCH_NAME: feat/github-profile-nord-dark
           THEME: nord_dark
           TIME_ZONE: America/Sao_Paulo
-          AUTO_PUSH: true
+          AUTO_PUSH: false
+
+      - name: Diagnose generated files
+        run: |
+          echo "=== Branch ==="
+          git branch --show-current
+
+          echo "=== Git status ==="
+          git status --short
+
+          echo "=== Generated files ==="
+          find profile-summary-card-output -type f | head -30
+
+          echo "=== Remote ==="
+          git remote -v
