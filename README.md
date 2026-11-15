@@ -96,14 +96,6 @@ Besides enterprise software development, I enjoy creating tools, automations, an
 
 Além do desenvolvimento de sistemas corporativos, gosto de criar ferramentas, automações e projetos relacionados a jogos.
 
-### 🎮 Steam Status
-
-A personal project focused on Steam status automation.
-
-Projeto pessoal voltado à automação de status da Steam.
-
-[![Steam Status](https://img.shields.io/badge/View_Project-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ceschiavolim/steam-status)
-
 ---
 
 ## 🌐 Connect With Me | Contato
