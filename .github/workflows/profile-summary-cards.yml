@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: feat/github-profile-nord-dark
+          persist-credentials: true
 
       - name: Generate GitHub Profile Cards
         uses: vn7n24fzkq/github-profile-summary-cards@release
@@ -23,7 +26,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           USERNAME: ceschiavolim
-          BRANCH_NAME: main
+          BRANCH_NAME: feat/github-profile-nord-dark
           THEME: nord_dark
           TIME_ZONE: America/Sao_Paulo
           AUTO_PUSH: true
