@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: github-profile-summary-cards
@@ -15,7 +16,6 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,25 +38,23 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ls -lah profile-summary-card-output/nord_dark/
-          test -f profile-summary-card-output/nord_dark/0-profile-details.svg
-          test -f profile-summary-card-output/nord_dark/1-repos-per-language.svg
-          test -f profile-summary-card-output/nord_dark/2-most-commit-language.svg
-          test -f profile-summary-card-output/nord_dark/3-stats.svg
-          test -f profile-summary-card-output/nord_dark/4-productive-time.svg
+          for file in \
+            0-profile-details.svg \
+            1-repos-per-language.svg \
+            2-most-commit-language.svg \
+            3-stats.svg \
+            4-productive-time.svg; do
+            test -s "profile-summary-card-output/nord_dark/$file"
+          done
 
-      - name: Commit and push cards
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add profile-summary-card-output/nord_dark/
-
-          if git diff --cached --quiet; then
-            echo 'No changes to publish.'
-            exit 0
-          fi
-
-          git commit -m 'chore: update GitHub profile statistics'
-          git push origin HEAD:master
+      - name: Create pull request for updated cards
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: master
+          branch: automation/profile-summary-cards
+          delete-branch: true
+          add-paths: profile-summary-card-output/nord_dark/**
+          commit-message: 'chore: update GitHub profile statistics'
+          title: 'chore: update GitHub profile statistics'
+          body: 'Atualização automática dos gráficos do perfil GitHub no tema nord_dark.'
